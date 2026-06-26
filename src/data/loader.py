@@ -89,7 +89,7 @@ class DataLoader:
     
     def _load_dataset(self, base_path):
 
-        print(f"\n📂 Loading dataset from: {base_path}")
+        print(f"\n Loading dataset from: {base_path}")
 
         common_files = self._get_common_filenames(base_path)
 
@@ -129,7 +129,7 @@ class DataLoader:
 
         labels = np.array(labels)
 
-        print(f"\n✅ Total aligned samples: {len(labels)}")
+        print(f"\n Total aligned samples: {len(labels)}")
 
         return {
             "data": data,
@@ -141,9 +141,9 @@ class DataLoader:
     # PUBLIC FUNCTIONS
     
     def load_training_data(self):
-        print("\n📂 Loading TRAINING data...")
+        print("\n Loading TRAINING data...")
         return self._load_dataset(self.cfg.TRAIN_PATH)
 
     def load_external_data(self):
-        print("\n🌍 Loading EXTERNAL data...")
+        print("\n Loading EXTERNAL data...")
         return self._load_dataset(self.cfg.EXTERNAL_PATH)

@@ -28,7 +28,7 @@ class Logger:
             self.experiment_name = f"{cfg.EXPERIMENT_NAME}"
             
         elif mode == "eval":
-            # 🔥 Use existing experiment name EXACTLY
+            # Use existing experiment name EXACTLY
             self.experiment_name = f"{cfg.EXPERIMENT_NAME}"
 
         else:

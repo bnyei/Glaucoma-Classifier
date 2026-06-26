@@ -25,7 +25,7 @@ def main(cfg):
     cfg.set_seed()
     logger = Logger(cfg, mode="eval")
 
-    print("\n🚀 Running K-Fold Experiment")
+    print("\n Running K-Fold Experiment")
     print(f"Fusion Strategy: {cfg.FUSION_STRATEGY}")
 
     
@@ -59,7 +59,7 @@ def main(cfg):
 
     
     # AGGREGATE OUT-OF-FOLD PREDICTIONS
-    print("\n📊 Aggregating predictions across folds...")
+    print("\nAggregating predictions across folds...")
 
     n_samples = len(data_dict["labels"])
 
@@ -92,9 +92,9 @@ def main(cfg):
         y_pred=y_pred_all,
         y_prob=y_prob_all
     )
-    print(f"✔ Saved aggregated predictions to: {pred_path}")
+    print(f"Saved aggregated predictions to: {pred_path}")
     
-    # ✅ COMPUTE INTERNAL METRICS
+    # COMPUTE INTERNAL METRICS
     internal_metrics = Metrics.compute_all(
         y_true_all,
         y_pred_all,
@@ -109,13 +109,13 @@ def main(cfg):
         category="internal"
     )
     
-#    print("\n📊 Final Internal Metrics:")
+#    print("\n Final Internal Metrics:")
 #    for k, v in internal_metrics.items():
 #        print(k, v)
 
     
     # ROC CURVE
-    print("\n📈 Generating ROC Curve...")
+    print("\n Generating ROC Curve...")
 
     roc_path = os.path.join(logger.paths["plots"], "internal_roc_ci.png")
 
@@ -134,10 +134,10 @@ def main(cfg):
 
     ReportGenerator.save_table(table, table_path)
 
-    print("\n📊 Clinical Table:")
+    print("\n Clinical Table:")
     print(table)
 
-#    print("\n✅ FINAL RESULTS (READY FOR PAPER):")
+#    print("\n FINAL RESULTS (READY FOR PAPER):")
 #    for k, v in final_metrics.items():
 #        if not k.endswith("_ci"):
 #            ci_key = f"{k}_ci"
@@ -149,7 +149,7 @@ def main(cfg):
     
     # FINAL LOG
     
-    trainer.logger.log("✅ K-Fold experiment completed successfully")
+    trainer.logger.log("K-Fold experiment completed successfully")
 
 
 if __name__ == "__main__":

@@ -250,6 +250,6 @@ class Trainer:
 
         LearningCurve.plot(all_histories, curve_path)
 
-        print(f"📈 Learning curve saved → {curve_path}")
+        print(f" Learning curve saved → {curve_path}")
 
         return all_fold_metrics, all_fold_predictions, final_metrics

@@ -25,7 +25,7 @@ def main(cfg):
     cfg.set_seed()
     logger = Logger(cfg, mode="eval")
 
-    print("\n🌍 Running External Validation")
+    print("\n Running External Validation")
 
     
     # LOAD EXTERNAL DATA
@@ -44,7 +44,7 @@ def main(cfg):
 
     
     # LOAD ALL FOLD MODELS
-    print("\n📦 Loading fold models...")
+    print("\n Loading fold models...")
 
     models = []
 
@@ -58,21 +58,21 @@ def main(cfg):
         )
 
         if not os.path.exists(model_path):
-            print(f"⚠️ Missing model: {model_path}")
+            print(f" Missing model: {model_path}")
             continue
 
         print(f"✔ Loading model: {model_path}")
         model = tf.keras.models.load_model(model_path)
         models.append(model)
 
-    # 🚨 CRITICAL SAFETY CHECK
+    # CRITICAL SAFETY CHECK
     if len(models) == 0:
         raise RuntimeError(
-            "❌ No models loaded. Check EXPERIMENT_NAME or training output path."
+            "No models loaded. Check EXPERIMENT_NAME or training output path."
         )
     
     # EXTRACT DATA ONCE
-    print("\n🧠 Ensembling predictions...")
+    print("\n Ensembling predictions...")
 
     
     # GET TRUE LABELS (SAFE EXTRACTION)
@@ -93,14 +93,14 @@ def main(cfg):
     # Binary prediction
     y_pred = (y_prob > 0.5).astype(int)
     
-    print("\n🔍 SANITY CHECK")
+    print("\n SANITY CHECK")
     print("y_true:", len(y_true))
     print("y_prob:", len(y_prob))
 
     assert len(y_true) == len(y_prob), "Mismatch between labels and predictions!"
     
     # METRICS WITH CI
-    print("\n📊 Computing metrics...")
+    print("\n Computing metrics...")
 
     y_true = external_data["labels"]
 
@@ -133,11 +133,11 @@ def main(cfg):
         y_prob=y_prob
     )
 
-    print(f"✅ Saved external predictions → {pred_path}")
+    print(f" Saved external predictions → {pred_path}")
 
     
     # ROC CURVE
-    print("\n📈 Generating ROC Curve...")
+    print("\n Generating ROC Curve...")
 
     roc_path = os.path.join(logger.paths["plots"], "external_roc_ci.png")
 
@@ -155,16 +155,16 @@ def main(cfg):
 
     ReportGenerator.save_table(table, table_path)
 
-    print("\n📊 Clinical Table:")
+    print("\n Clinical Table:")
     print(table)
     
     
     # FINAL LOG
-    print("\n🌍 External Results:")
+    print("\n External Results:")
     for k, v in external_metrics.items():
         print(f"{k}: {v}")
 
-    logger.log("✅ External validation completed successfully")
+    logger.log(" External validation completed successfully")
 
 
 if __name__ == "__main__":

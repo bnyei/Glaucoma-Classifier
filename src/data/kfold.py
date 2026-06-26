@@ -71,7 +71,7 @@ class KFoldManager:
         if set(all_val_indices) != set(range(n_samples)):
             raise ValueError("❌ Some samples missing in validation folds!")
 
-        print("✅ K-Fold validation checks passed")
+        print(" K-Fold validation checks passed")
 
     
     # SUMMARIZE SPLITS
@@ -85,7 +85,7 @@ class KFoldManager:
             y: labels array
         """
 
-        print("\n📊 K-FOLD DISTRIBUTION SUMMARY\n")
+        print("\n K-FOLD DISTRIBUTION SUMMARY\n")
 
         for i, (train_idx, val_idx) in enumerate(splits):
             y_train = y[train_idx]
